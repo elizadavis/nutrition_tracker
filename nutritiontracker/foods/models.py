@@ -2,7 +2,7 @@ from django.db import models
 
 class Food(models.Model):
   name = models.CharField(max_length=100, unique=True)
-  serving_size = models.DecimalField(max_digits=3, decimal_places=2)
+  serving_size = models.DecimalField(max_digits=5, decimal_places=2)
   serving_unit = models.CharField(max_length=100)
   calories = models.IntegerField()
   fat = models.IntegerField(default=0)
