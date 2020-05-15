@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Food(models.Model):
   name = models.CharField(max_length=100, unique=True)
@@ -12,5 +13,6 @@ class Food(models.Model):
   total_sugar = models.IntegerField(default=0)
   added_sugar = models.IntegerField(default=0)
   sodium = models.IntegerField(default=0)
+  owner = models.ForeignKey(User, related_name='foods', on_delete=models.CASCADE, null=True)
   def __str__(self):
     return self.name

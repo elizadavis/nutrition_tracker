@@ -4,8 +4,14 @@ from .serializers import FoodSerializer
 
 # Food ViewSet
 class FoodViewSet(viewsets.ModelViewSet):
-  queryset = Food.objects.all()
   permission_classes = [
-    permissions.AllowAny
+    permissions.IsAuthenticated
   ]
+
   serializer_class = FoodSerializer
+
+  def get_queryset(self):
+    return self.request.user.foods.all()
+
+  def perform_create(self, serializer):
+    serializer.save(owner=self.request.user)

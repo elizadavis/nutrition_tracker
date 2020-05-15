@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { GET_FOODS, DELETE_FOOD, ADD_FOOD, GET_ERRORS } from './types';
-import { createMessage } from './messages';
+import { GET_FOODS, DELETE_FOOD, ADD_FOOD } from './types';
+import { createMessage, returnErrors } from './messages';
 
 // Get all foods
 export const getFoods = () => dispatch => {
@@ -11,7 +11,7 @@ export const getFoods = () => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => console.error(err));
+    .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
 // Delete a food
@@ -37,16 +37,7 @@ export const addFood = (food) => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => {
-      const errors = {
-        msg: err.response.data,
-        status: err.response.status
-      }
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors
-      })
-    });
+    .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
 
