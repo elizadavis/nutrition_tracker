@@ -16,11 +16,13 @@ export class Alerts extends Component {
       if (error.msg.name) alert.error(`Name: ${error.msg.name.join()}`);
       if (error.msg.serving_size) alert.error(`Name: ${error.msg.serving_size.join()}`);
       if (error.msg.non_field_errors) alert.error(error.msg.non_field_errors.join());
+      if (error.msg.username) alert.error(`Username: ${error.msg.username.join()}`);
     }
 
     if (message !== prevProps.message) {
       if (message.deleteFood) alert.success(message.deleteFood);
       if (message.addFood) alert.success(message.addFood);
+      if (message.passwordMismatch) alert.error(message.passwordMismatch)
     }
   }
 
