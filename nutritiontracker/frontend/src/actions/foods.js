@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { GET_FOODS, DELETE_FOOD, ADD_FOOD } from './types';
 import { createMessage, returnErrors } from './messages';
+import { tokenConfig } from './auth';
 
 // Get all foods
-export const getFoods = () => dispatch => {
-  axios.get('/api/foods/')
+export const getFoods = () => (dispatch, getState) => {
+  axios.get('/api/foods/', tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_FOODS,
@@ -15,8 +16,8 @@ export const getFoods = () => dispatch => {
 }
 
 // Delete a food
-export const deleteFood = (id) => dispatch => {
-  axios.delete(`/api/foods/${id}/`)
+export const deleteFood = id => (dispatch, getState) => {
+  axios.delete(`/api/foods/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteFood: "Food Removed"}));
       dispatch({
@@ -28,8 +29,8 @@ export const deleteFood = (id) => dispatch => {
 }
 
 // Add a food
-export const addFood = (food) => dispatch => {
-  axios.post('/api/foods/', food)
+export const addFood = food => (dispatch, getState) => {
+  axios.post('/api/foods/', food, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addFood: "Food Added"}));
       dispatch({
