@@ -6,8 +6,8 @@ export default function Dashboard() {
   return (
     <div>
       <Fragment>
-        <Form />
         <Foods />
+        <Form />
       </Fragment>
     </div>
   )

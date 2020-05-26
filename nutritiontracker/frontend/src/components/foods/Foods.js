@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFoods, deleteFood } from '../../actions/foods';
+import MealForm from '../meals/MealForm';
 
 export class Foods extends Component {
   static propTypes = {
@@ -53,6 +54,7 @@ export class Foods extends Component {
                 <td>{food.sodium}</td>
                 <td><button onClick={this.props.deleteFood.bind(this, food.id)}
                   className="btn btn-danger btn-sm">Delete</button></td>
+                {/* <td><MealForm amount={1} food={food} /></td> */}
               </tr>
             ))}
           </tbody>
