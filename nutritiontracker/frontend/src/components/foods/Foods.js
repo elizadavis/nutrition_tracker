@@ -2,18 +2,18 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFoods, deleteFood } from '../../actions/foods';
-// import MealForm from '../meals/MealForm';
+import MealForm from '../meals/MealForm';
 
 export const Foods = props => {
   Foods.propTypes = {
     foods: PropTypes.array.isRequired,
     getFoods: PropTypes.func.isRequired,
     deleteFood: PropTypes.func.isRequired
-  }
+  };
 
   useEffect(() => {
     props.getFoods();
-  }, [])
+  }, []);
   
   return (
     <>
@@ -34,6 +34,7 @@ export const Foods = props => {
             <th>Added Sugar (g)</th>
             <th>Sodium (mg)</th>
             <th></th>
+            <th>Servings Consumed</th>
           </tr>
         </thead>
         <tbody>
@@ -53,7 +54,7 @@ export const Foods = props => {
               <td>{food.sodium}</td>
               <td><button onClick={() => props.deleteFood(food.id)}
                 className="btn btn-danger btn-sm">Delete</button></td>
-              {/* <td><MealForm amount={1} food={food} /></td> */}
+              <td><MealForm food={food} /></td>
             </tr>
           ))}
         </tbody>

@@ -5,19 +5,6 @@ import { addFood } from '../../actions/foods';
 
 // tbd: add min/max values, add units?
 export const Form = props => {
-  // state = {
-  //   name: '',
-  //   serving_size: 0,
-  //   serving_unit: '',
-  //   calories: 0,
-  //   fat: 0,
-  //   protein: 0,
-  //   total_carbs: 0,
-  //   fiber: 0,
-  //   total_sugar: 0,
-  //   added_sugar: 0,
-  //   sodium: 0
-  // }
   const [name, setName] = useState('');
   const [serving_size, setServingSize] = useState('');
   const [serving_unit, setServingUnit] = useState('');
@@ -36,19 +23,6 @@ export const Form = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // const {
-    //   name,
-    //   serving_size,
-    //   serving_unit,
-    //   calories,
-    //   fat,
-    //   protein,
-    //   total_carbs,
-    //   fiber,
-    //   total_sugar,
-    //   added_sugar,
-    //   sodium
-    // } = state;
     const food = {
       name,
       serving_size,

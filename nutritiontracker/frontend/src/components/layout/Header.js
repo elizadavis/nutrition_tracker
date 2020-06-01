@@ -31,6 +31,9 @@ export const Header = props => {
         </strong>
       </span>
       <li className="nav-item">
+        <Link to="/meals" className="nav-link">Meals</Link>
+      </li>
+      <li className="nav-item">
         <button 
           className="nav-link btn btn-info btn-sm text-light"
           onClick={props.logout}
