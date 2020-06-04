@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Food(models.Model):
-  name = models.CharField(max_length=100, unique=True)
+  name = models.CharField(max_length=100)
   serving_size = models.DecimalField(max_digits=5, decimal_places=2)
   serving_unit = models.CharField(max_length=100)
   calories = models.IntegerField()

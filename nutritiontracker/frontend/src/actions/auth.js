@@ -2,7 +2,6 @@ import axios from 'axios';
 import { returnErrors } from './messages';
 import {
   USER_LOADED,
-  USER_LOADING,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -95,7 +94,6 @@ export const register = ({ username, password, email }) => (dispatch) => {
 
   axios.post('/api/auth/register', body, config)
     .then(res => {
-      console.log('register')
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data

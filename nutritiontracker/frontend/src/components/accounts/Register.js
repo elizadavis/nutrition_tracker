@@ -1,45 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/auth';
 import { createMessage } from '../../actions/messages';
 
-export class Register extends Component {
-  state = {
-    username: '',
-    email: '',
-    password: '',
-    password2: ''
-  };
+export const Register = props => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
 
-  static propTypes = {
+  Register.propTypes = {
     register: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     createMessage: PropTypes.func.isRequired
   }
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   const { password, password2, username, email } = this.state;
-  //   if (password !== password2) {
-  //     this.props.createMessage({ passwordMismatch: 'Passwords Do Not Match'})
-  //   }
-  //   else {
-  //     const newUser = {
-  //       username,
-  //       password,
-  //       email
-  //     }
-  //     this.props.register(newUser);
-  //   }
-  // }
-
-  submit = e => {
+  const submit = e => {
     e.preventDefault();
-    const { password, password2, username, email } = this.state;
     if (password !== password2) {
-      this.props.createMessage({ passwordMismatch: 'Passwords Do Not Match'})
+      props.createMessage({ passwordMismatch: 'Passwords Do Not Match'})
     }
     else {
       const newUser = {
@@ -47,32 +28,26 @@ export class Register extends Component {
         password,
         email
       }
-      this.props.register(newUser);
+      props.register(newUser);
     }
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  render() {
-    if (this.props.isAuthenticated) {
+  const whichReturn = () => {
+    if (props.isAuthenticated) {
       return <Redirect to="/" />
-    }
-    const { username, email, password, password2 } = this.state;
-
-    return (
-      <div className="col-md-6 m-auto">
+    } else {
+      return (
+        <div className="col-md-6 m-auto">
         <div className="card card-body mt-5">
           <h2 className="text-center">Register</h2>
-          <form onSubmit={this.submit}>
+          <form onSubmit={submit}>
             <div className="form-group">
               <label>Username</label>
               <input
                 type="text"
                 className="form-control"
                 name="username"
-                onChange={this.handleChange}
+                onChange={e => setUsername(e.target.value)}
                 value={username}
               />
             </div>
@@ -82,7 +57,7 @@ export class Register extends Component {
                 type="email"
                 className="form-control"
                 name="email"
-                onChange={this.handleChange}
+                onChange={e => setEmail(e.target.value)}
                 value={email}
               />
             </div>
@@ -92,7 +67,7 @@ export class Register extends Component {
                 type="password"
                 className="form-control"
                 name="password"
-                onChange={this.handleChange}
+                onChange={e => setPassword(e.target.value)}
                 value={password}
               />
             </div>
@@ -102,7 +77,7 @@ export class Register extends Component {
                 type="password"
                 className="form-control"
                 name="password2"
-                onChange={this.handleChange}
+                onChange={e => setPassword2(e.target.value)}
                 value={password2}
               />
             </div>
@@ -117,8 +92,13 @@ export class Register extends Component {
           </form>
         </div>
       </div>
-    )
+      )
+    }
   }
+  return (
+    whichReturn()
+  )
+  
 }
 
 const mapStateToProps = state => ({

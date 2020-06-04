@@ -1,8 +1,8 @@
-import { GET_FOODS, DELETE_FOOD, ADD_FOOD } from '../actions/types.js';
+import { GET_FOODS, DELETE_FOOD, ADD_FOOD } from '../actions/types';
 
 const initialState = {
   foods: []
-}
+};
 
 export default function(state = initialState, action) {
   switch(action.type) {
@@ -24,4 +24,4 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-}
+};
